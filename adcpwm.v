@@ -25,7 +25,8 @@ module adcpwm(
 	output wire [15:0] regdesp
     );
 
-wire [`F-1:0] saladc,saltrunca;
+wire [`N-1:0] saladc;
+wire [`F-2:0] saltrunca;
 
 Divisores_Frecuencias relojs (
     .MasterClk(clk), 

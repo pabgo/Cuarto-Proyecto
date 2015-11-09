@@ -23,7 +23,7 @@ module Recepcion_ADC(
 input wire SDATA, reset ,CS,SCLK,
 output reg rx_done_tick, 
 output reg [15:0] b_reg,
-output wire [`F-1:0]data_Out
+output wire [`N-1:0]data_Out
     );
 
 wire signo;
@@ -105,7 +105,7 @@ end
 	
 assign signo = b_reg[11];
 
-assign data_Out = {{2{~signo}},{b_reg[10:4]}};
+assign data_Out = {{11{~signo}},{b_reg[10:4]}};
 
 
 endmodule

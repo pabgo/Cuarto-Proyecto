@@ -20,16 +20,25 @@
 //
 //////////////////////////////////////////////////////////////////////////////////
 module truncador(
-	input wire [`F-1:0]Dato_In,
+	input wire [`N-1:0]Dato_In,
 	input wire CS,
-	output reg [`F-1:0]Dato_Out = 0
+	output reg [`F-2:0]Dato_Out = 0
     );
+
+//always@(negedge CS)
+//begin
+//	Dato_Out = {~{Dato_In[`N-1]},Dato_In[`F-3:0]};
+//	//Dato_Out = {~{Dato_In[`F-1]},Dato_In[`F-3:0]};
+//end
 
 always@(negedge CS)
 begin
-	//Dato_Out = {~{Dato_In[`F-1]},Dato_In[`F-2:1]};
-	Dato_Out = {~{Dato_In[`F-1]},Dato_In[`F-3:0]};
+if(Dato_In[`N-3:`F-1]!= 8'b00000000 && Dato_In[`N-1]==0 )
+	Dato_Out = 8'b11111111;
+else if(Dato_In[`N-3:`F-1]!= 8'b11111111 && Dato_In[`N-1]==1)
+	Dato_Out = 8'b00000000;
+else
+	Dato_Out = {~{Dato_In[`N-1]},Dato_In[`F-3:0]};
 end
-
 
 endmodule
