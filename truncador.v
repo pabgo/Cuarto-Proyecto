@@ -38,7 +38,7 @@ if(Dato_In[`N-3:`F-1]!= 8'b00000000 && Dato_In[`N-1]==0 )
 else if(Dato_In[`N-3:`F-1]!= 8'b11111111 && Dato_In[`N-1]==1)
 	Dato_Out = 8'b00000000;
 else
-	Dato_Out = {~{Dato_In[`N-1]},Dato_In[`F-3:0]};
+	Dato_Out = {~{Dato_In[`N-1]},Dato_In[`F-2:1]};
 end
 
 endmodule
