@@ -4,9 +4,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date:    16:25:22 11/05/2015 
+// Create Date:    21:42:45 10/26/2015 
 // Design Name: 
-// Module Name:    truncador 
+// Module Name:    Truncador 
 // Project Name: 
 // Target Devices: 
 // Tool versions: 
@@ -19,26 +19,20 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module truncador(
-	input wire [`N-1:0]Dato_In,
-	input wire CS,
-	output reg [`F-2:0]Dato_Out = 0
+module Truncador(
+
+	input wire signed [2*`N-1:0] dato,
+	output wire signed [`N-1:0]resultado
     );
 
-//always@(negedge CS)
-//begin
-//	Dato_Out = {~{Dato_In[`N-1]},Dato_In[`F-3:0]};
-//	//Dato_Out = {~{Dato_In[`F-1]},Dato_In[`F-3:0]};
-//end
+wire [31:0]aux1,aux0;
 
-always@(negedge CS)
-begin
-if(Dato_In[`N-3:`F-1]!= 8'b00000000 && Dato_In[`N-1]==0 )
-	Dato_Out = 8'b11111111;
-else if(Dato_In[`N-3:`F-1]!= 8'b11111111 && Dato_In[`N-1]==1)
-	Dato_Out = 8'b00000000;
-else
-	Dato_Out = {~{Dato_In[`N-1]},Dato_In[`F-3:0]};
-end
+
+assign aux0 = 32'h00000000;
+assign aux1 = 32'hffffffff;
+assign resultado = (dato[2*`N-1]==0 && dato[2*`N-3:(2*`F)-1]==0) ? {dato[2*`N-1],dato[(2*`F)-2:0]}:
+					    (dato[2*`N-1]==0 && dato[2*`N-3:(2*`F)-1]>0) ? {dato[2*`N-1],aux1[(2*`F)-2:0]}:
+						 (dato[2*`N-1]==1 && (dato[2*`N-3:(2*`F)-1]==aux1[(2*`F)-2:0])) ? {dato[2*`N-1],dato[(2*`F)-2:0]}:
+					    {dato[2*`N-1],aux0[(2*`F)-2:0]};
 
 endmodule

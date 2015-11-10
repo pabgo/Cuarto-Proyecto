@@ -105,7 +105,7 @@ end
 	
 assign signo = b_reg[11];
 
-assign data_Out = {{11{~signo}},{b_reg[10:4]}};
+assign data_Out = {{10{~signo}},{b_reg[10:3]}};
 
 
 endmodule
