@@ -20,11 +20,11 @@
 //
 //////////////////////////////////////////////////////////////////////////////////
 module Truncador18(
-	input wire signed[`N-1:0]Dato_In,
+	input wire [`N-1:0]Dato_In,
 	output wire [`F-2:0]Dato_Out
     );
 
-wire signed [`N-1:0]aux;
+/*wire signed [`N-1:0]aux;*/
 //always@(negedge CS)
 //begin
 //	Dato_Out = {~{Dato_In[`N-1]},Dato_In[`F-3:0]};
@@ -33,8 +33,8 @@ wire signed [`N-1:0]aux;
 
 //always@(negedge CS)
 //begin
-	assign Dato_Out = {/*~*/{aux[`N-1]},aux[`N-2:`N-8]};//`N-2:`N-8``
-	assign aux = Dato_In + `N'd128;
+	assign Dato_Out = {~{Dato_In[`N-1]},Dato_In[`N-2:`N-8]};//`N-2:`N-8``
+	/*assign aux = Dato_In + `N'd256;*/
 //end
 
 endmodule
