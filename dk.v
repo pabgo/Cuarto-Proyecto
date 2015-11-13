@@ -34,7 +34,7 @@ wire signed [`N-1:0]salidasumador;
 wire signed [`N-1:0]salidatruncador;
 wire signed [2*`N-1:0]salidamultiplicador;
 wire signed [`N-1:0]salidaFFDEnabledk;
-wire signed [`N-1:0]constante = 16'd150;
+wire signed [`N-1:0]constante = 18'd150;
 
 Registro FFD1 (
     .clk(clk), 

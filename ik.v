@@ -28,12 +28,14 @@ module ik(
 wire signed [`N-1:0]salidaFFD1;
 wire signed [2*`N-1:0]salidaFFD2;
 wire signed [2*`N-1:0]salidaFFD3;
-wire signed [2*`N-1:0]salidaik1;
+wire signed [`N-1:0]salidaik1;
+wire signed [2*`N-1:0]salidaik1doble;
+/*wire signed [2*`N-1:0]salidaik1;*/
 wire signed [2*`N-1:0]salidasumador;
 wire signed [`N-1:0]salidatruncador;
 wire signed [2*`N-1:0]salidamultiplicador;
 wire signed [`N-1:0]constante = 18'd7;
-wire m;
+
 
 Registro FFD1 (
     .clk(clk), 
@@ -57,7 +59,7 @@ Registro_doble FFD2 (
 
 Sumador_doble SumadorDobleAncho (
     .num1(salidaFFD2), 
-    .num2(salidaik1), 
+    .num2(salidaik1doble), 
     .result(salidasumador)
     );
 	 
@@ -68,20 +70,22 @@ Registro_doble FFD3 (
     .Q(salidaFFD3)
     );
 	 
-RegistroEnable_doble ik1 (
+/*RegistroEnable_doble ik1 (
     .clk(clk), 
     .reset(reset), 
     .enable(en1), 
-    .D(salidaFFD3), 
+    .D(salidasumador), 
     .Q(salidaik1)
-    );
+    );*/	 
+
+assign salidaik1doble = {{18{ik[`N-1]}},{ik[`N-1:0]}};
 
 Truncador Truncador (
     .dato(salidaFFD3), 
     .resultado(salidatruncador)
     );
 	 
-RegistroEnable RegistroEnable (
+RegistroEnable RegEnable (
     .clk(clk), 
     .reset(reset), 
     .enable(en2), 

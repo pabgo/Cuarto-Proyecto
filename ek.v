@@ -27,9 +27,9 @@ module ek(
 	 
 wire signed [`N-1:0]aux;
 
-assign aux = ref - yk;
-assign ek = (aux[`N-1]==0 && aux[`N-3:`F-1]!=8'b00000000) ? {aux[`N-1:`N-2],8'b00000000,8'b11111111}:
-					 (aux[`N-1]==1 && aux[`N-3:`F-1]!=8'b11111111) ? {aux[`N-1:`N-2],8'b11111111,8'b00000000}:
+assign ek = ref - yk;
+/*assign ek = (aux[`N-1]==0 && aux[`N-3:`F-1]!=8'b00000000) ? {aux[`N-1:`N-2],8'b00000000,8'b11111111}:
+					 (aux[`N-1]==1 && aux[`N-3:`F-1]!=8'b11111111) ? {aux[`N-1:`N-2],8'b11111111,8'b00000001}:
 					  aux;
-
+*/
 endmodule

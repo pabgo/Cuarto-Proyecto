@@ -20,7 +20,6 @@
 //
 //////////////////////////////////////////////////////////////////////////////////
 module Truncador(
-
 	input wire signed [2*`N-1:0] dato,
 	output wire signed [`N-1:0]resultado
     );
